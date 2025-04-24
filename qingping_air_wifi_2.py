@@ -76,6 +76,6 @@ if __name__ == "__main__":
             print("Failed to retrieve data")
         
         # Wait before next attempt
-        wait_time = 60  # seconds
+        wait_time = 10  # seconds
         print(f"Waiting {wait_time} seconds before next reading...")
         time.sleep(wait_time)
