@@ -1,0 +1,67 @@
+Preparing Raspberry Pi 5 for Arduino Connection
+
+1. Install required Python packages:
+   Once your Raspberry Pi is booted up, open a terminal and run these commands:
+   ```bash
+   sudo apt update
+   sudo apt install python3-pip python3-matplotlib
+   pip3 install pyserial numpy
+   ```
+
+2. Transfer the Python script:
+   - Copy the Python script to your Raspberry Pi
+   - Save it as `water_sensor_monitor.py`
+
+3. Make the script executable:
+```bash 
+   chmod +x water_sensor_monitor.py
+```
+4. Connect Arduino to Raspberry Pi:
+   - Connect the Arduino UNO to any USB port on the Raspberry Pi
+   - The Arduino should be powered by the USB connection
+
+5. Identify the correct serial port:
+```bash
+
+   ls /dev/ttyUSB* /dev/ttyACM*
+   
+```
+   - For Arduino UNO, it's typically `/dev/ttyACM0`
+   - If you see a different device name, note it down
+
+6. Modify the Python script if needed:
+   - Open the script in a text editor:
+
+```bash
+
+     nano water_sensor_monitor.py
+
+ ```
+     
+   - Find the line `SERIAL_PORT = '/dev/ttyUSB0'`
+   - Change it to match your port (likely `/dev/ttyACM0`)
+   - Save the file (Ctrl+O, then Enter, then Ctrl+X)
+
+7. Run the Python script:
+
+```bash
+      python3 water_sensor_monitor.py
+ ```     
+
+8. If you get permission errors:
+
+```bash
+   sudo usermod -a -G dialout $USER
+ ```
+   
+   Then log out and log back in, or try:
+   
+```bash
+   sudo chmod 666 /dev/ttyACM0  # Or whatever your port is
+ 
+ ```
+   
+
+The script should connect to your Arduino, read the water sensor data, and display a real-time visualization with matplotlib. All data will also be saved to a CSV file in the same directory.
+
+Let me know if you encounter any issues during this process!
